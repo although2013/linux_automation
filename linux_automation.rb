@@ -1,6 +1,6 @@
 
-image1 = "screenshot1.jpg"
-image2 = "screenshot2.jpg"
+$image1 = "screenshot1.jpg"
+$image2 = "screenshot2.jpg"
 
 
 refresh = [147, 85]
@@ -21,17 +21,17 @@ def capture(image)
 end
 
 def same?(iamge1, image2)
-  del = `compare -metric AE -fuzz 5% #{image1} #{image2} null: 2>&1`
+  del = `compare -metric AE -fuzz 5% #{$image1} #{$image2} null: 2>&1`
   return true if del.to_i < 100
   false
 end
 
 
 loop do
-  capture image1
+  capture $image1
   sleep 5
-  capture image2
-  if same?(image1, image2)
+  capture $image2
+  if same?($image1, $image2)
     mouse_move refresh
     click_left
     sleep 8
