@@ -1,12 +1,7 @@
 
-#`sudo apt-get install imagemagic`
-
-
 image1 = "screenshot1.jpg"
 image2 = "screenshot2.jpg"
 
-#window = `xdotool selectwindow`
-#make_focus = `xdotool windowfocus --sync #{window}`
 
 refresh = [147, 85]
 hold = [699, 588]
@@ -32,7 +27,7 @@ def same?(iamge1, image2)
 end
 
 
-loop
+loop do
   capture image1
   sleep 5
   capture image2
