@@ -3,9 +3,12 @@ $image1 = "screenshot1.jpg"
 $image2 = "screenshot2.jpg"
 
 
-refresh = [147, 85]
-hold = [699, 588]
-change = [696, 557]
+
+def getmouselocation
+  str = `xdotool getmouselocation`
+  str ~= /x:(\d+)\s+y:(\d+)/
+  [$1, $2]
+end
 
 
 def click_left
@@ -26,6 +29,12 @@ def same?(iamge1, image2)
   false
 end
 
+puts "get refresh 5s after"
+refresh = getmouselocation
+puts "get hold 5s after"
+hold    = getmouselocation
+puts "get change 5s after"
+change  = getmouselocation
 
 loop do
   capture $image1
@@ -35,7 +44,7 @@ loop do
     puts "same"
     mouse_move refresh
     click_left
-    sleep 8
+    sleep 25
     mouse_move hold
     click_left
     mouse_move change
