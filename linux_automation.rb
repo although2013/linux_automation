@@ -6,7 +6,7 @@ $image2 = "screenshot2.jpg"
 
 def getmouselocation
   str = `xdotool getmouselocation`
-  str ~= /x:(\d+)\s+y:(\d+)/
+  str =~ /x:(\d+)\s+y:(\d+)/
   [$1, $2]
 end
 
@@ -30,10 +30,13 @@ def same?(iamge1, image2)
 end
 
 puts "get refresh 5s after"
+sleep 5
 refresh = getmouselocation
 puts "get hold 5s after"
+sleep 5
 hold    = getmouselocation
 puts "get change 5s after"
+sleep 5
 change  = getmouselocation
 
 loop do
