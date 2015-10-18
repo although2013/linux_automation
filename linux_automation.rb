@@ -32,6 +32,7 @@ loop do
   sleep 5
   capture $image2
   if same?($image1, $image2)
+    puts "same"
     mouse_move refresh
     click_left
     sleep 8
@@ -39,6 +40,8 @@ loop do
     click_left
     mouse_move change
     click_left
+  else
+    puts "not same"
   end
   sleep 2
 end
