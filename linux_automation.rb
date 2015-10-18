@@ -40,9 +40,9 @@ loop
     mouse_move refresh
     click_left
     sleep 8
-    mousemove hold
+    mouse_move hold
     click_left
-    mousemove change
+    mouse_move change
     click_left
   end
   sleep 2
