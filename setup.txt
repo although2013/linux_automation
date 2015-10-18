@@ -1,0 +1,82 @@
+Overview
+
+ This will take about 30 minutes.
+
+We will be setting up a Ruby on Rails development environment on Ubuntu 14.04 Trusty Tahr.
+
+The reason we're going to be using Ubuntu is because the majority of code you write will run on a Linux server. Ubuntu is one of the easiest Linux distributions to use with lots of documentation so it's a great one to start with.
+
+You'll want to download the latest Desktop version here: http://releases.ubuntu.com/14.04/
+
+Some of you may choose to develop on Ubuntu Server so that your development environment matches your production server. You can find it on the same download link above.
+
+Installing Ruby
+
+Choose the version of Ruby you want to install:
+
+
+The first step is to install some dependencies for Ruby.
+
+sudo apt-get update
+sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
+Next we're going to be installing Ruby using one of three methods. Each have their own benefits, most people prefer using rbenv these days, but if you're familiar with rvm you can follow those steps as well. I've included instructions for installing from source as well, but in general, you'll want to choose either rbenv or rvm.
+
+Choose one method. Some of these conflict with each other, so choose the one that sounds the most interesting to you, or go with my suggestion, rbenv.
+
+Using rbenv (Recommended)
+Using rvm
+From source
+The installation for rvm is pretty simple:
+
+sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
+curl -L https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm
+rvm install 2.2.3
+rvm use 2.2.3 --default
+ruby -v
+Now we tell Rubygems not to install the documentation for each package locally and then install Bundler
+
+echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+gem install bundler
+Configuring Git
+
+We'll be using Git for our version control system so we're going to set it up to match our Github account. If you don't already have a Github account, make sure to register. It will come in handy for the future.
+
+Replace my name and email address in the following steps with the ones you used for your Github account.
+
+git config --global color.ui true
+git config --global user.name "YOUR NAME"
+git config --global user.email "YOUR@EMAIL.com"
+ssh-keygen -t rsa -C "YOUR@EMAIL.com"
+The next step is to take the newly generated SSH key and add it to your Github account. You want to copy and paste the output of the following command and paste it here.
+
+cat ~/.ssh/id_rsa.pub
+Once you've done this, you can check and see if it worked:
+
+ssh -T git@github.com
+You should get a message like this:
+
+Hi excid3! You've successfully authenticated, but GitHub does not provide shell access.
+Installing Rails
+
+Choose the version of Rails you want to install:
+
+
+Since Rails ships with so many dependencies these days, we're going to need to install a Javascript runtime like NodeJS. This lets you use Coffeescript and the Asset Pipeline in Rails which combines and minifies your javascript to provide a faster production environment.
+
+To install NodeJS, we're going to add it using a PPA repository:
+
+sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install nodejs
+And now, without further adieu:
+
+gem install rails -v 4.2.4
+If you're using rbenv, you'll need to run the following command to make the rails executable available:
+
+rbenv rehash
+Now that you've installed Rails, you can run the rails -v command to make sure you have everything installed correctly:
+
+rails -v
+# Rails 4.2.4
+If you get a different result for some reason, it means your environment may not be setup properly.
